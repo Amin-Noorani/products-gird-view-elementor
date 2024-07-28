@@ -61,10 +61,10 @@ if( !class_exists( "\MN\RTL\Init" ) ) {
 		}
 
 		public static function frontend_styles() {
-			if( !wp_style_is( 'mn_bootstrap', 'enqueued' ) ) {
+			if( !wp_style_is( 'mn_bootstrap' ) ) {
 				wp_enqueue_style( 'mn_bootstrap', MN_RTL_URI . "assets/css/bootstrap.min.css", [], MN_RTL_VERSION );
 			}
-			if( !wp_style_is( 'mn_elementor_widgets', 'enqueued' ) ) {
+			if( !wp_style_is( 'mn_elementor_widgets' ) ) {
 				wp_enqueue_style( 'mn_elementor_widgets', MN_RTL_URI . "assets/css/main.css", [], MN_RTL_VERSION );
 			}
 		}

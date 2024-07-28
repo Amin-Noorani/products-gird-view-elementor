@@ -3449,12 +3449,11 @@ ol {
   display: block;
 }
 
-.single-product .product-info .price .discount-price {
+.single-product .product-info .product-price del span {
   margin: 0;
   color: #aaaaaa;
   text-decoration: line-through;
   font-weight: normal;
-  margin-left: 10px;
   font-size: 14px;
   display: inline-block;
 }
@@ -3684,12 +3683,11 @@ ol {
   display: inline-block;
 }
 
-.special-offer .offer-content .text .price .discount-price {
+.special-offer .offer-content .text .product-price del span {
   margin: 0;
   color: #aaaaaa;
   text-decoration: line-through;
   font-weight: normal;
-  margin-left: 10px;
   font-size: 18px;
   display: inline-block;
 }
