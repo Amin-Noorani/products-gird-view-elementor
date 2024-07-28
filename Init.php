@@ -20,13 +20,6 @@ if( !class_exists( "\MN\RTL\Init" ) ) {
 			self::i18n();
 
 			include( MN_RTL_DIR . 'Includes.php' );
-
-			add_action( 'pre_get_posts', function( $query ) {
-				return;
-				echo "<pre>";
-				print_r( $query ); echo PHP_EOL;
-				echo "</pre>";
-			} );
 		}
 
 		private static function constants() {
