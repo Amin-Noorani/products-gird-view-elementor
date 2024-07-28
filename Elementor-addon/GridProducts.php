@@ -352,7 +352,7 @@ class GridProducts extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'style_desc_section',
 			[
-				'label'	=> esc_html__( 'Title style', 'mn_rtl' ),
+				'label'	=> esc_html__( 'Description style', 'mn_rtl' ),
 				'tab'	=> \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
