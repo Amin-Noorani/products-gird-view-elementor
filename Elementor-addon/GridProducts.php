@@ -30,9 +30,13 @@ class GridProducts extends \Elementor\Widget_Base {
 		$this->product_control();
 
 		// Style Tab
-		// $this->style_title_control();
 		$this->style_title_control();
 		$this->style_desc_control();
+		$this->style_product_img_control();
+		$this->style_product_title_control();
+		$this->style_product_category_control();
+		$this->style_product_review_control();
+		$this->style_product_price_control();
 	}
 
 	private function text_control() {
@@ -219,6 +223,36 @@ class GridProducts extends \Elementor\Widget_Base {
 			]
 		);
 
+		// Text align
+		$this->add_responsive_control( 
+			'title_text-align',
+			[
+				'type'	=> \Elementor\Controls_Manager::CHOOSE,
+				'label'			=> esc_html__( 'Text align', 'mn_rtl' ),
+				'options'		=> [
+					'left'		=> [
+						'title'	=> esc_html__( 'Left', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-left',
+					],
+					'center'	=> [
+						'title'	=> esc_html__( 'Center', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-center',
+					],
+					'right'		=> [
+						'title'	=> esc_html__( 'Right', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-right',
+					],
+					'justify'	=> [
+						'title'	=> esc_html__( 'Justify', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-justify',
+					],
+				],
+				'selectors'		=> [
+					$selector	=> 'text-align: {{VALUE}};'
+				],
+			]
+		);
+
 		// Color
 		$this->add_control(
 			'title_color',
@@ -263,6 +297,7 @@ class GridProducts extends \Elementor\Widget_Base {
 			]
 		);
 
+		// Box shadow
 		$this->add_group_control(
 			\Elementor\Group_Control_Box_Shadow::get_type(),
 			[
@@ -271,6 +306,7 @@ class GridProducts extends \Elementor\Widget_Base {
 			]
 		);
 
+		// Text shadow
 		$this->add_group_control(
 			\Elementor\Group_Control_Text_Shadow::get_type(),
 			[
@@ -327,6 +363,36 @@ class GridProducts extends \Elementor\Widget_Base {
 			]
 		);
 
+		// Text align
+		$this->add_responsive_control( 
+			'desc_text-align',
+			[
+				'type'	=> \Elementor\Controls_Manager::CHOOSE,
+				'label'			=> esc_html__( 'Text align', 'mn_rtl' ),
+				'options'		=> [
+					'left'		=> [
+						'title'	=> esc_html__( 'Left', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-left',
+					],
+					'center'	=> [
+						'title'	=> esc_html__( 'Center', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-center',
+					],
+					'right'		=> [
+						'title'	=> esc_html__( 'Right', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-right',
+					],
+					'justify'	=> [
+						'title'	=> esc_html__( 'Justify', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-justify',
+					],
+				],
+				'selectors'		=> [
+					$selector	=> 'text-align: {{VALUE}};'
+				],
+			]
+		);
+
 		// Color
 		$this->add_control(
 			'desc_color',
@@ -371,6 +437,7 @@ class GridProducts extends \Elementor\Widget_Base {
 			]
 		);
 
+		// Box shadow
 		$this->add_group_control(
 			\Elementor\Group_Control_Box_Shadow::get_type(),
 			[
@@ -379,11 +446,638 @@ class GridProducts extends \Elementor\Widget_Base {
 			]
 		);
 
+		// Text shadow
 		$this->add_group_control(
 			\Elementor\Group_Control_Text_Shadow::get_type(),
 			[
 				'selector'	=> $selector,
 				'name'		=> 'desc_text_shadow'
+			]
+		);
+
+		$this->end_controls_section();
+	}
+
+	private function style_product_img_control() {
+		$selector = "{{WRAPPER}} .product-image img";
+		$this->start_controls_section(
+			'style_pro_img_section',
+			[
+				'label'	=> esc_html__( 'Product Image style', 'mn_rtl' ),
+				'tab'	=> \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		// Padding
+		$this->add_responsive_control(
+			'pro_img_padding',
+			[
+				'label'			=> esc_html__( 'Padding', 'mn_rtl' ),
+				'size_units'	=> [ 'px', '%', 'em', 'rem', 'custom' ],
+				'type'			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors'		=> [
+					$selector	=> 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Margin
+		$this->add_responsive_control(
+			'pro_img_margin',
+			[
+				'label'			=> esc_html__( 'Margin', 'mn_rtl' ),
+				'size_units'	=> [ 'px', '%', 'em', 'rem', 'custom' ],
+				'type'			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors'		=> [
+					$selector	=> 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Border
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_img_border'
+			]
+		);
+
+		// Border radius
+		$this->add_responsive_control(
+			'pro_img_border_radius',
+			[
+				'label'			=> esc_html__( 'Border Radius', 'mn_rtl' ),
+				'size_units'	=> [ 'px', '%', 'em', 'rem', 'custom' ],
+				'type'			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors'		=> [
+					$selector	=> 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Box shadow
+		$this->add_group_control(
+			\Elementor\Group_Control_Box_Shadow::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_img_box_shadow'
+			]
+		);
+
+		$this->end_controls_section();
+	}
+
+	private function style_product_title_control() {
+		$selector = "{{WRAPPER}} .product-title";
+		$this->start_controls_section(
+			'style_pro_title_section',
+			[
+				'label'	=> esc_html__( 'Product Title style', 'mn_rtl' ),
+				'tab'	=> \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		// Padding
+		$this->add_responsive_control(
+			'pro_title_padding',
+			[
+				'label'			=> esc_html__( 'Padding', 'mn_rtl' ),
+				'size_units'	=> [ 'px', '%', 'em', 'rem', 'custom' ],
+				'type'			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors'		=> [
+					$selector	=> 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Margin
+		$this->add_responsive_control(
+			'pro_title_margin',
+			[
+				'label'			=> esc_html__( 'Margin', 'mn_rtl' ),
+				'size_units'	=> [ 'px', '%', 'em', 'rem', 'custom' ],
+				'type'			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors'		=> [
+					$selector	=> 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Typography
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_title_typography'
+			]
+		);
+
+		// Text align
+		$this->add_responsive_control( 
+			'pro_title_text-align',
+			[
+				'type'	=> \Elementor\Controls_Manager::CHOOSE,
+				'label'			=> esc_html__( 'Text align', 'mn_rtl' ),
+				'options'		=> [
+					'left'		=> [
+						'title'	=> esc_html__( 'Left', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-left',
+					],
+					'center'	=> [
+						'title'	=> esc_html__( 'Center', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-center',
+					],
+					'right'		=> [
+						'title'	=> esc_html__( 'Right', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-right',
+					],
+					'justify'	=> [
+						'title'	=> esc_html__( 'Justify', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-justify',
+					],
+				],
+				'selectors'		=> [
+					$selector	=> 'text-align: {{VALUE}};'
+				],
+			]
+		);
+
+		// Color
+		$this->add_control(
+			'pro_title_color',
+			[
+				'label'			=> esc_html__( 'Color', 'mn_rtl' ),
+				'type'			=> \Elementor\Controls_Manager::COLOR,
+				'selectors'		=> [
+					"{$selector} a"	=> 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		// Background
+		$this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_title_background'
+			]
+		);
+
+		// Border
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_title_border'
+			]
+		);
+
+		// Border radius
+		$this->add_responsive_control(
+			'pro_title_border_radius',
+			[
+				'label'			=> esc_html__( 'Border Radius', 'mn_rtl' ),
+				'size_units'	=> [ 'px', '%', 'em', 'rem', 'custom' ],
+				'type'			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors'		=> [
+					$selector	=> 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Box shadow
+		$this->add_group_control(
+			\Elementor\Group_Control_Box_Shadow::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_title_box_shadow'
+			]
+		);
+
+		// Text shadow
+		$this->add_group_control(
+			\Elementor\Group_Control_Text_Shadow::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_title_text_shadow'
+			]
+		);
+
+		$this->end_controls_section();
+	}
+
+	private function style_product_category_control() {
+		$selector = "{{WRAPPER}} .product-cat";
+		$this->start_controls_section(
+			'style_pro_cat_section',
+			[
+				'label'	=> esc_html__( 'Product Category style', 'mn_rtl' ),
+				'tab'	=> \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		// Padding
+		$this->add_responsive_control(
+			'pro_cat_padding',
+			[
+				'label'			=> esc_html__( 'Padding', 'mn_rtl' ),
+				'size_units'	=> [ 'px', '%', 'em', 'rem', 'custom' ],
+				'type'			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors'		=> [
+					$selector	=> 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Margin
+		$this->add_responsive_control(
+			'pro_cat_margin',
+			[
+				'label'			=> esc_html__( 'Margin', 'mn_rtl' ),
+				'size_units'	=> [ 'px', '%', 'em', 'rem', 'custom' ],
+				'type'			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors'		=> [
+					$selector	=> 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Typography
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_cat_typography'
+			]
+		);
+
+		// Text align
+		$this->add_responsive_control( 
+			'pro_cat_text-align',
+			[
+				'type'	=> \Elementor\Controls_Manager::CHOOSE,
+				'label'			=> esc_html__( 'Text align', 'mn_rtl' ),
+				'options'		=> [
+					'left'		=> [
+						'title'	=> esc_html__( 'Left', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-left',
+					],
+					'center'	=> [
+						'title'	=> esc_html__( 'Center', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-center',
+					],
+					'right'		=> [
+						'title'	=> esc_html__( 'Right', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-right',
+					],
+					'justify'	=> [
+						'title'	=> esc_html__( 'Justify', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-justify',
+					],
+				],
+				'selectors'		=> [
+					$selector	=> 'text-align: {{VALUE}};'
+				],
+			]
+		);
+
+		// Color
+		$this->add_control(
+			'pro_cat_color',
+			[
+				'label'			=> esc_html__( 'Color', 'mn_rtl' ),
+				'type'			=> \Elementor\Controls_Manager::COLOR,
+				'selectors'		=> [
+					"{$selector}"	=> 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		// Background
+		$this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_cat_background'
+			]
+		);
+
+		// Border
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_cat_border'
+			]
+		);
+
+		// Border radius
+		$this->add_responsive_control(
+			'pro_cat_border_radius',
+			[
+				'label'			=> esc_html__( 'Border Radius', 'mn_rtl' ),
+				'size_units'	=> [ 'px', '%', 'em', 'rem', 'custom' ],
+				'type'			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors'		=> [
+					$selector	=> 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Box shadow
+		$this->add_group_control(
+			\Elementor\Group_Control_Box_Shadow::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_cat_box_shadow'
+			]
+		);
+
+		// Text shadow
+		$this->add_group_control(
+			\Elementor\Group_Control_Text_Shadow::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_cat_text_shadow'
+			]
+		);
+
+		$this->end_controls_section();
+	}
+
+	private function style_product_review_control() {
+		$selector = "{{WRAPPER}} .product-review";
+		$this->start_controls_section(
+			'style_pro_review_section',
+			[
+				'label'	=> esc_html__( 'Product Review style', 'mn_rtl' ),
+				'tab'	=> \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		// Padding
+		$this->add_responsive_control(
+			'pro_review_padding',
+			[
+				'label'			=> esc_html__( 'Padding', 'mn_rtl' ),
+				'size_units'	=> [ 'px', '%', 'em', 'rem', 'custom' ],
+				'type'			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors'		=> [
+					$selector	=> 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Margin
+		$this->add_responsive_control(
+			'pro_review_margin',
+			[
+				'label'			=> esc_html__( 'Margin', 'mn_rtl' ),
+				'size_units'	=> [ 'px', '%', 'em', 'rem', 'custom' ],
+				'type'			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors'		=> [
+					$selector	=> 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Typography
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'selector'	=> "{$selector} .product-review-text",
+				'name'		=> 'pro_review_typography'
+			]
+		);
+
+		// Text align
+		$this->add_responsive_control( 
+			'pro_review_text-align',
+			[
+				'type'	=> \Elementor\Controls_Manager::CHOOSE,
+				'label'			=> esc_html__( 'Text align', 'mn_rtl' ),
+				'options'		=> [
+					'left'		=> [
+						'title'	=> esc_html__( 'Left', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-left',
+					],
+					'center'	=> [
+						'title'	=> esc_html__( 'Center', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-center',
+					],
+					'right'		=> [
+						'title'	=> esc_html__( 'Right', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-right',
+					],
+					'justify'	=> [
+						'title'	=> esc_html__( 'Justify', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-justify',
+					],
+				],
+				'selectors'		=> [
+					$selector	=> 'text-align: {{VALUE}};'
+				],
+			]
+		);
+
+		// Color
+		$this->add_control(
+			'pro_review_color',
+			[
+				'label'			=> esc_html__( 'Color', 'mn_rtl' ),
+				'type'			=> \Elementor\Controls_Manager::COLOR,
+				'selectors'		=> [
+					"{$selector} .product-review-text"	=> 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		// Background
+		$this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_review_background'
+			]
+		);
+
+		// Border
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_review_border'
+			]
+		);
+
+		// Border radius
+		$this->add_responsive_control(
+			'pro_review_border_radius',
+			[
+				'label'			=> esc_html__( 'Border Radius', 'mn_rtl' ),
+				'size_units'	=> [ 'px', '%', 'em', 'rem', 'custom' ],
+				'type'			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors'		=> [
+					$selector	=> 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Box shadow
+		$this->add_group_control(
+			\Elementor\Group_Control_Box_Shadow::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_review_box_shadow'
+			]
+		);
+
+		// Text shadow
+		$this->add_group_control(
+			\Elementor\Group_Control_Text_Shadow::get_type(),
+			[
+				'selector'	=> "{$selector} .product-review-text",
+				'name'		=> 'pro_review_text_shadow'
+			]
+		);
+
+		$this->end_controls_section();
+	}
+
+	private function style_product_price_control() {
+		$selector = "{{WRAPPER}} .product-price";
+		$this->start_controls_section(
+			'style_pro_price_section',
+			[
+				'label'	=> esc_html__( 'Product Price style', 'mn_rtl' ),
+				'tab'	=> \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		// Padding
+		$this->add_responsive_control(
+			'pro_price_padding',
+			[
+				'label'			=> esc_html__( 'Padding', 'mn_rtl' ),
+				'size_units'	=> [ 'px', '%', 'em', 'rem', 'custom' ],
+				'type'			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors'		=> [
+					$selector	=> 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Margin
+		$this->add_responsive_control(
+			'pro_price_margin',
+			[
+				'label'			=> esc_html__( 'Margin', 'mn_rtl' ),
+				'size_units'	=> [ 'px', '%', 'em', 'rem', 'custom' ],
+				'type'			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors'		=> [
+					$selector	=> 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Typography
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_price_typography'
+			]
+		);
+
+		// Text align
+		$this->add_responsive_control( 
+			'pro_price_text-align',
+			[
+				'type'	=> \Elementor\Controls_Manager::CHOOSE,
+				'label'			=> esc_html__( 'Text align', 'mn_rtl' ),
+				'options'		=> [
+					'left'		=> [
+						'title'	=> esc_html__( 'Left', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-left',
+					],
+					'center'	=> [
+						'title'	=> esc_html__( 'Center', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-center',
+					],
+					'right'		=> [
+						'title'	=> esc_html__( 'Right', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-right',
+					],
+					'justify'	=> [
+						'title'	=> esc_html__( 'Justify', 'mn_rtl' ),
+						'icon'	=> 'eicon-text-align-justify',
+					],
+				],
+				'selectors'		=> [
+					$selector	=> 'text-align: {{VALUE}};'
+				],
+			]
+		);
+
+		// Color
+		$this->add_control(
+			'pro_price_color',
+			[
+				'label'			=> esc_html__( 'Color', 'mn_rtl' ),
+				'type'			=> \Elementor\Controls_Manager::COLOR,
+				'selectors'		=> [
+					"{$selector} span"	=> 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		// Background
+		$this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_price_background'
+			]
+		);
+
+		// Border
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_price_border'
+			]
+		);
+
+		// Border radius
+		$this->add_responsive_control(
+			'pro_price_border_radius',
+			[
+				'label'			=> esc_html__( 'Border Radius', 'mn_rtl' ),
+				'size_units'	=> [ 'px', '%', 'em', 'rem', 'custom' ],
+				'type'			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors'		=> [
+					$selector	=> 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Box shadow
+		$this->add_group_control(
+			\Elementor\Group_Control_Box_Shadow::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_price_box_shadow'
+			]
+		);
+
+		// Text shadow
+		$this->add_group_control(
+			\Elementor\Group_Control_Text_Shadow::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_price_text_shadow'
 			]
 		);
 
@@ -422,7 +1116,6 @@ class GridProducts extends \Elementor\Widget_Base {
 		if( !empty( $cats ) ) {
 			$args['category'] = $cats;
 		}
-		// print_r( $args ); die;
 		$products = wc_get_products( $args );
 
 		?>
@@ -461,19 +1154,19 @@ class GridProducts extends \Elementor\Widget_Base {
 										</div>
 									</div>
 									<div class="product-info">
-										<span class="category"><?php echo $cat_name ?></span>
-										<h4 class="title">
+										<span class="category product-cat"><?php echo $cat_name ?></span>
+										<h4 class="title product-title">
 											<a href="<?php echo get_permalink( $product->get_id() ); ?>"><?php echo $product->get_name() ?></a>
 										</h4>
 										<?php if( wc_review_ratings_enabled() ) { ?>
-											<ul class="review">
+											<ul class="review product-review">
 												<?php for ($i=0; $i <= 5; $i++) { ?>
 													<li><i class="lni lni-star<?php $average_rating <= 1 ? '-filled' : ''?>"></i></li>
 												<?php } ?>
-												<li><span><?php echo $average_rating ?> Review(s)</span></li>
+												<li><span class="product-review-text"><?php echo $average_rating ?> Review(s)</span></li>
 											</ul>
 										<?php } ?>
-										<div class="price">
+										<div class="price product-price">
 											<span><?php echo $product->get_price_html() ?></span>
 										</div>
 									</div>
