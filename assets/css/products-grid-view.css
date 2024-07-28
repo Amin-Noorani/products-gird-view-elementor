@@ -3441,6 +3441,9 @@ ol {
   color: #0167F3;
   display: inline-block;
 }
+.product-price {
+  display: block;
+}
 
 .single-product .product-info .price .discount-price {
   margin: 0;
