@@ -65,4 +65,19 @@ class Utils {
 		}
 		return $sanitize_after ? self::convert_chars( $string, $sanitize_after, [], false ) : $string;
 	}
+
+	/**
+	 * Convert value to boolean
+	 *
+	 * @param mixed $value
+	 * @return boolean
+	 */
+	public static function to_bool( $value ) {
+		if( empty( $value ) || is_wp_error( $value ) || is_null( $value ) ) return false;
+		$value = strtolower( $value );
+		if( in_array( $value, ["false", 'no', 'off', '0'] ) ) return false;
+		if( in_array( $value, ["true", 'yes', 'on', '1'] ) ) return true;
+
+		return wp_validate_boolean( $value );
+	}
 }

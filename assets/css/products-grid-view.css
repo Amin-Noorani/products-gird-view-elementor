@@ -3622,6 +3622,10 @@ ol {
   padding: 0;
   text-align: center;
 }
+.sale-tag.sale-tag-right {
+  left: unset !important;
+  right: 0;
+}
 
 .special-offer .offer-content .text {
   margin-top: 20px;
