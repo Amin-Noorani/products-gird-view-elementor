@@ -38,6 +38,8 @@ class GridProducts extends \Elementor\Widget_Base {
 		$this->style_product_review_control();
 		$this->style_product_price_control();
 		$this->style_product_sale_badge_control();
+		$this->style_product_new_badge_control();
+		$this->style_product_btn_control();
 	}
 
 	private function text_control() {
@@ -171,6 +173,19 @@ class GridProducts extends \Elementor\Widget_Base {
 			'show_sale_badge',
 			[
 				'label' => esc_html__( 'Show Sale Badge', 'mn_rtl' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'label_on' => esc_html__( 'Show', 'mn_rtl' ),
+				'label_off' => esc_html__( 'Hide', 'mn_rtl' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+			]
+		);
+
+		// Show new badge
+		$this->add_control(
+			'show_new_badge',
+			[
+				'label' => esc_html__( 'Show New Badge', 'mn_rtl' ),
 				'type' => \Elementor\Controls_Manager::SWITCHER,
 				'label_on' => esc_html__( 'Show', 'mn_rtl' ),
 				'label_off' => esc_html__( 'Hide', 'mn_rtl' ),
@@ -1121,6 +1136,7 @@ class GridProducts extends \Elementor\Widget_Base {
 					'left'		=> esc_html__( 'Left', 'mn_rtl' ),
 					'right'		=> esc_html__( 'Right', 'mn_rtl' ),
 				],
+				'default'		=> 'left'
 			]
 		);
 
@@ -1166,7 +1182,7 @@ class GridProducts extends \Elementor\Widget_Base {
 				'label'			=> esc_html__( 'Color', 'mn_rtl' ),
 				'type'			=> \Elementor\Controls_Manager::COLOR,
 				'selectors'		=> [
-					"{$selector} span"	=> 'color: {{VALUE}};',
+					"{$selector}"	=> 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1223,6 +1239,244 @@ class GridProducts extends \Elementor\Widget_Base {
 		$this->end_controls_section();
 	}
 
+	private function style_product_new_badge_control() {
+		$selector = "{{WRAPPER}} .new-tag";
+		$this->start_controls_section(
+			'style_pro_new_badge_section',
+			[
+				'label'		=> esc_html__( 'Product New badge style', 'mn_rtl' ),
+				'tab'		=> \Elementor\Controls_Manager::TAB_STYLE,
+				'condition'	=> [
+					'show_new_badge'	=> 'yes'
+				]
+			]
+		);
+
+		// Position
+		$this->add_responsive_control( 
+			'pro_new_badge_position',
+			[
+				'type'	=> \Elementor\Controls_Manager::SELECT,
+				'label'			=> esc_html__( 'Position', 'mn_rtl' ),
+				'options'		=> [
+					'left'		=> esc_html__( 'Left', 'mn_rtl' ),
+					'right'		=> esc_html__( 'Right', 'mn_rtl' ),
+				],
+				'default'		=> 'left'
+			]
+		);
+
+		// Padding
+		$this->add_responsive_control(
+			'pro_new_badge_padding',
+			[
+				'label'			=> esc_html__( 'Padding', 'mn_rtl' ),
+				'size_units'	=> [ 'px', '%', 'em', 'rem', 'custom' ],
+				'type'			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors'		=> [
+					$selector	=> 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Margin
+		$this->add_responsive_control(
+			'pro_new_badge_margin',
+			[
+				'label'			=> esc_html__( 'Margin', 'mn_rtl' ),
+				'size_units'	=> [ 'px', '%', 'em', 'rem', 'custom' ],
+				'type'			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors'		=> [
+					$selector	=> 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Typography
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_new_badge_typography'
+			]
+		);
+
+		// Color
+		$this->add_control(
+			'pro_new_badge_color',
+			[
+				'label'			=> esc_html__( 'Color', 'mn_rtl' ),
+				'type'			=> \Elementor\Controls_Manager::COLOR,
+				'selectors'		=> [
+					"{$selector}"	=> 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		// Background
+		$this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_new_badge_background'
+			]
+		);
+
+		// Border
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_new_badge_border'
+			]
+		);
+
+		// Border radius
+		$this->add_responsive_control(
+			'pro_new_badge_border_radius',
+			[
+				'label'			=> esc_html__( 'Border Radius', 'mn_rtl' ),
+				'size_units'	=> [ 'px', '%', 'em', 'rem', 'custom' ],
+				'type'			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors'		=> [
+					$selector	=> 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Box shadow
+		$this->add_group_control(
+			\Elementor\Group_Control_Box_Shadow::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_new_badge_box_shadow'
+			]
+		);
+
+		// Text shadow
+		$this->add_group_control(
+			\Elementor\Group_Control_Text_Shadow::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_new_badge_text_shadow'
+			]
+		);
+
+		$this->end_controls_section();
+	}
+
+	private function style_product_btn_control() {
+		$selector = "{{WRAPPER}} .product-add-to-cart-btn";
+		$this->start_controls_section(
+			'style_pro_btn_section',
+			[
+				'label'		=> esc_html__( 'Product Button style', 'mn_rtl' ),
+				'tab'		=> \Elementor\Controls_Manager::TAB_STYLE,
+				'condition'	=> [
+					'show_sale_badge'	=> 'yes'
+				]
+			]
+		);
+
+		// Padding
+		$this->add_responsive_control(
+			'pro_btn_padding',
+			[
+				'label'			=> esc_html__( 'Padding', 'mn_rtl' ),
+				'size_units'	=> [ 'px', '%', 'em', 'rem', 'custom' ],
+				'type'			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors'		=> [
+					$selector	=> 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Margin
+		$this->add_responsive_control(
+			'pro_btn_margin',
+			[
+				'label'			=> esc_html__( 'Margin', 'mn_rtl' ),
+				'size_units'	=> [ 'px', '%', 'em', 'rem', 'custom' ],
+				'type'			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors'		=> [
+					$selector	=> 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Typography
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_btn_typography'
+			]
+		);
+
+		// Color
+		$this->add_control(
+			'pro_btn_color',
+			[
+				'label'			=> esc_html__( 'Color', 'mn_rtl' ),
+				'type'			=> \Elementor\Controls_Manager::COLOR,
+				'selectors'		=> [
+					"{$selector}"	=> 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		// Background
+		$this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_btn_background'
+			]
+		);
+
+		// Border
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_btn_border'
+			]
+		);
+
+		// Border radius
+		$this->add_responsive_control(
+			'pro_btn_border_radius',
+			[
+				'label'			=> esc_html__( 'Border Radius', 'mn_rtl' ),
+				'size_units'	=> [ 'px', '%', 'em', 'rem', 'custom' ],
+				'type'			=> \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors'		=> [
+					$selector	=> 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Box shadow
+		$this->add_group_control(
+			\Elementor\Group_Control_Box_Shadow::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_btn_box_shadow'
+			]
+		);
+
+		// Text shadow
+		$this->add_group_control(
+			\Elementor\Group_Control_Text_Shadow::get_type(),
+			[
+				'selector'	=> $selector,
+				'name'		=> 'pro_btn_text_shadow'
+			]
+		);
+
+		$this->end_controls_section();
+	}
+
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 		$title = Utils::convert_chars( $settings['widget_title'] );
@@ -1234,9 +1488,11 @@ class GridProducts extends \Elementor\Widget_Base {
 		$offset = Utils::convert_chars( $settings['products_offset'], true, 'absint' );
 		$limit = Utils::convert_chars( $settings['products_limit'], true, 'absint' );
 		$show_sale_badge = !empty( $settings['show_sale_badge'] ) && Utils::to_bool( $settings['show_sale_badge'] );
+		$show_new_badge = !empty( $settings['show_new_badge'] ) && Utils::to_bool( $settings['show_new_badge'] );
 
 		// Styles
 		$pro_sale_badge_position = Utils::convert_chars( $settings['pro_sale_badge_position'] );
+		$pro_new_badge_position = Utils::convert_chars( $settings['pro_new_badge_position'] );
 
 		foreach( $cats as &$cat ) {
 			if( $cat == 0 ) { // Means all cats
@@ -1260,7 +1516,6 @@ class GridProducts extends \Elementor\Widget_Base {
 			$args['category'] = $cats;
 		}
 		$products = wc_get_products( $args );
-
 		?>
 		<!-- Start Trending Product Area -->
 		<section class="trending-product section">
@@ -1297,9 +1552,11 @@ class GridProducts extends \Elementor\Widget_Base {
 											$sale_percent = '-' . (100 - round( $product->get_sale_price() / $product->get_regular_price() * 100 )) . '%';
 											?>
 											<span class="sale-tag<?php echo $pro_sale_badge_position == 'right' ? " sale-tag-right" : "" ?>"><?php echo $sale_percent ?></span>
+										<?php } else if( $show_new_badge && $product->get_date_created()->format( 'U' ) > strtotime('-7 days', date_i18n( 'U' ) ) ) { ?>
+											<span class="new-tag<?php echo $pro_new_badge_position == 'right' ? " new-tag-right" : "" ?>"><?php esc_html_e( 'New', 'mn_rtl' ) ?></span>
 										<?php } ?>
 										<div class="button">
-											<a href="<?php echo $product->add_to_cart_url() ?>" class="btn"><i class="lni lni-cart"></i> <?php echo $product->add_to_cart_text() ?></a>
+											<a href="<?php echo $product->add_to_cart_url() ?>" class="btn product-add-to-cart-btn"><i class="lni lni-cart"></i> <?php echo $product->add_to_cart_text() ?></a>
 										</div>
 									</div>
 									<div class="product-info">
@@ -1312,7 +1569,7 @@ class GridProducts extends \Elementor\Widget_Base {
 												<?php for ($i=0; $i <= 5; $i++) { ?>
 													<li><i class="lni lni-star<?php $average_rating <= 1 ? '-filled' : ''?>"></i></li>
 												<?php } ?>
-												<li><span class="product-review-text"><?php echo $average_rating ?> Review(s)</span></li>
+												<li><span class="product-review-text"><?php echo $average_rating ?> <?php esc_html_e( 'Review(s)', 'nm_rtl' ) ?></span></li>
 											</ul>
 										<?php } ?>
 										<div class="price product-price">
@@ -1330,5 +1587,4 @@ class GridProducts extends \Elementor\Widget_Base {
 		<!-- End Trending Product Area -->
 		<?php
 	}
-	
 }

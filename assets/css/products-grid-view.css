@@ -3340,6 +3340,10 @@ ol {
   left: 0;
   z-index: 22;
 }
+.single-product .product-image .new-tag.new-tag-right {
+  left: unset !important;
+  right: 0;
+}
 
 .single-product .product-image .button {
   position: absolute;
@@ -3622,7 +3626,7 @@ ol {
   padding: 0;
   text-align: center;
 }
-.sale-tag.sale-tag-right {
+.special-offer .offer-content .image .sale-tag.sale-tag-right {
   left: unset !important;
   right: 0;
 }
