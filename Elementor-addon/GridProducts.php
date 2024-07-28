@@ -1170,7 +1170,7 @@ class GridProducts extends \Elementor\Widget_Base {
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			[
-				'selector'	=> $selector,
+				'selector'	=> "{$selector} .amount, {$selector} .woocommerce-Price-currencySymbol",
 				'name'		=> 'pro_sale_badge_typography'
 			]
 		);
