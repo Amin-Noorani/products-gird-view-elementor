@@ -128,7 +128,7 @@ class GridProducts extends \Elementor\Widget_Base {
 			'price-desc' => __( 'Sort by price: high to low', 'woocommerce' ),
 		];
 		if( !wc_review_ratings_enabled() ) {
-			unset( $catalog_orderby_options['rating'] );
+			unset( $ordering_options['rating'] );
 		}
 		$this->add_control(
 			'ordering_control',
