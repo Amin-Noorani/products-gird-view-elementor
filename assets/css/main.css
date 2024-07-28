@@ -3616,7 +3616,7 @@ ol {
   position: absolute;
   top: 10px;
   padding: 5px 10px;
-  right: 10px;
+  left: 10px;
   z-index: 22;
   height: 50px;
   width: 50px;
@@ -3627,7 +3627,7 @@ ol {
 }
 .special-offer .offer-content .image .sale-tag.sale-tag-right {
   left: unset !important;
-  right: 0;
+  right: 10px;
 }
 
 .special-offer .offer-content .text {
@@ -3700,11 +3700,13 @@ ol {
   border: 1px solid #eee;
   padding: 15px 10px;
   border-radius: 4px;
+  display: flex;
+flex-wrap: nowrap;
+justify-content: space-between;
 }
 
 .special-offer .offer-content .box {
   background: #ffffff0d;
-  width: 24%;
   height: auto;
   margin: 0;
   display: inline-block;
@@ -3726,8 +3728,15 @@ ol {
   color: #081828;
 }
 
-.special-offer .offer-content .alert {
+body:not(.elementor-editor-active) .special-offer .offer-content .end-sale-alert {
   display: none;
+}
+.end-sale-alert {
+  background: rgb(204, 24, 24)
+}
+.end-sale-alert h1 {
+  color: #fff;
+  padding: 12px 20px;
 }
 
 /*======================================
