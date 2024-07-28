@@ -56,17 +56,17 @@ if( !class_exists( "\MN\RTL\Init" ) ) {
 		}
 
 		public static function register_elementor_widgets( $widgets_manager ) {
-			$widgets = [
-				'GridProducts',
-			];
-
 			include( MN_RTL_DIR . "Elementor-addon/GridProducts.php" );
 			$widgets_manager->register( new \MN\RTL\Elementor\GridProducts() );
 		}
 
 		public static function frontend_styles() {
-			wp_enqueue_style( 'mn_show_bootstrap', MN_RTL_URI . "assets/css/bootstrap.min.css", [], MN_RTL_VERSION );
-			wp_enqueue_style( 'mn_show_products_grid', MN_RTL_URI . "assets/css/products-grid-view.css", [], MN_RTL_VERSION );
+			if( !wp_style_is( 'mn_bootstrap', 'enqueued' ) ) {
+				wp_enqueue_style( 'mn_bootstrap', MN_RTL_URI . "assets/css/bootstrap.min.css", [], MN_RTL_VERSION );
+			}
+			if( !wp_style_is( 'mn_elementor_widgets', 'enqueued' ) ) {
+				wp_enqueue_style( 'mn_elementor_widgets', MN_RTL_URI . "assets/css/main.css", [], MN_RTL_VERSION );
+			}
 		}
 	}
 	add_action( 'init', [Init::class, 'init'], 1 );
